@@ -51,23 +51,25 @@
 
 // export default App
 
-import React from 'react'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import HomeCards from './components/HomeCards'
-import JobListings from './components/JobListings'
-import ViewAllJobs from './components/ViewAllJobs'
+import React from 'react';
+import HomePage from './pages/HomePage';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+
+// const router = createBrowserRouter(createRoutesFromElements(<Route index element={<h1>My Jobs App</h1>} />));
+
+const router = createBrowserRouter(createRoutesFromElements(<Route index element={<HomePage />} />));
 
 const App = () => {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <HomeCards />
-      <JobListings />
-      <ViewAllJobs />
-    </>
-  )
+  return <RouterProvider router={router} />
+  // return (
+  //   <>
+  //     <Navbar />
+  //     <Hero />
+  //     <HomeCards />
+  //     <JobListings />
+  //     <ViewAllJobs />
+  //   </>
+  // )
 }
 
 export default App
