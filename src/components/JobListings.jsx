@@ -3,6 +3,7 @@ import JobListing from './JobListing';
 import { useState, useEffect } from 'react';
 import { renderMatches } from 'react-router-dom';
 import Spinner from './Spinner';
+import JobPage from '../pages/JobPage';
 
 // to make request -
 // useEffect - allows components to have side effects and we want the side effect of fetching data when the component renders
