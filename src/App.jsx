@@ -59,6 +59,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import MainLayout from './layouts/MainLayout';
 import JobPage, { jobLoader } from './pages/JobPage';
 import AddJob from './pages/AddJob';
+import EditJobPage from './pages/EditJobPage';
 
 // const router = createBrowserRouter(createRoutesFromElements(<Route index element={<h1>My Jobs App</h1>} />));
 
@@ -85,6 +86,17 @@ const App = () => {
 
   }
 
+  const updateJob = async (job) => {
+    const res = await fetch(`/api/jobs/${job.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(job),
+    })
+    return;
+  };
+
   const router = createBrowserRouter(createRoutesFromElements(
     // add parent route for rest of the routes
     <Route path='/' element={<MainLayout />}>
@@ -93,6 +105,7 @@ const App = () => {
       <Route path='/add-job' element={<AddJob addJobSubmit={addJob} />} />
       {/* deleteJob gets passed on to JobPage */}
       <Route path='/jobs/:id' element={<JobPage deleteJob={deleteJob} />} loader={jobLoader} />
+      <Route path='/edit-job/:id' element={<EditJobPage updateJobSubmit={updateJob} />} loader={jobLoader} />
       <Route path='*' element={< NotFoundPage />} />
     </Route>
   ));
