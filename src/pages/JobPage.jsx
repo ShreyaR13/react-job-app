@@ -1,6 +1,7 @@
 import { useParams, useLoaderData, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 // Note - useEffect can be used to fetch data here as well, the way we did for fetchJobs()
 // However, here we will use react router's data loader
@@ -19,6 +20,7 @@ const JobPage = ({ deleteJob }) => {
         const confirm = window.confirm('Are you sure you want to delete this listing?');
         if (!confirm) return;
         deleteJob(jobId);
+        toast.success('Job deleted successfully');
         navigate('/jobs');
     }
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const AddJob = ({ addJobSubmit }) => {
     const [type, setType] = useState('Full-Time');
@@ -32,6 +33,7 @@ const AddJob = ({ addJobSubmit }) => {
         }
         // The values caught from the App.jsx page are mapped to the fields here and sent to API
         addJobSubmit(newJob);
+        toast.success('Job added successfully!');
         return navigate('/jobs');
     }
 
