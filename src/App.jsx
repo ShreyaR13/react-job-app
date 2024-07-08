@@ -62,18 +62,41 @@ import AddJob from './pages/AddJob';
 
 // const router = createBrowserRouter(createRoutesFromElements(<Route index element={<h1>My Jobs App</h1>} />));
 
-const router = createBrowserRouter(createRoutesFromElements(
-  // add parent route for rest of the routes
-  <Route path='/' element={<MainLayout />}>
-    <Route index element={<HomePage />} />
-    <Route path='/jobs' element={<JobsPage />} />
-    <Route path='/add-job' element={<AddJob />} />
-    <Route path='/jobs/:id' element={<JobPage />} loader={jobLoader} />
-    <Route path='*' element={< NotFoundPage />} />
-  </Route>
-));
 
 const App = () => {
+  // This function passes the newJob field (values) details as a prop/argument to the addJobSubmit function
+  const addJob = async (newJob) => {
+    // console.log(newJob);
+    const res = await fetch('/api/jobs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newJob),
+    })
+    return;
+  };
+
+  const deleteJob = async (jobId) => {
+    // console.log('delete', jobId);
+    const res = await fetch(`/api/jobs/${jobId}`, {
+      method: 'DELETE',
+    })
+
+  }
+
+  const router = createBrowserRouter(createRoutesFromElements(
+    // add parent route for rest of the routes
+    <Route path='/' element={<MainLayout />}>
+      <Route index element={<HomePage />} />
+      <Route path='/jobs' element={<JobsPage />} />
+      <Route path='/add-job' element={<AddJob addJobSubmit={addJob} />} />
+      {/* deleteJob gets passed on to JobPage */}
+      <Route path='/jobs/:id' element={<JobPage deleteJob={deleteJob} />} loader={jobLoader} />
+      <Route path='*' element={< NotFoundPage />} />
+    </Route>
+  ));
+
   return <RouterProvider router={router} />
   // return (
   //   <>
